@@ -3,7 +3,7 @@ const actions = require('../methods/actions')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.send('Hello World')
+    res.send('ThaliHelp Server')
 })
 
 router.get('/dashboard', (req, res) => {
