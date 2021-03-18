@@ -1,11 +1,12 @@
 var User = require('../models/user')
+var Iron = require('../models/iron')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 
 var functions = {
     addNew: function (req, res) {
         if ((!req.body.firstname) ||(!req.body.password) || (!req.body.lastname)) {
-            res.json({success: false, msg: 'hello there Enter all fields'})
+            res.json({success: false, msg: 'Enter all fields'})
         }
         else {
             var newUser = User({
@@ -15,6 +16,26 @@ var functions = {
                 emailaddress: req.body.emailaddress
             });
             newUser.save(function (err, newUser) {
+                if (err) {
+                    res.json({success: false, msg: 'Failed to save'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully saved'})
+                }
+            })
+        }
+    },
+    addIron: function (req, res) {
+        if ((!req.body.date) ||(!req.body.medicine) || (!req.body.unitstaken)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+            var newIron = Iron({
+                date: req.body.date,
+                medicine: req.body.medicine,
+                unitstaken: req.body.unitstaken
+            });
+            newIron.save(function (err, newIron) {
                 if (err) {
                     res.json({success: false, msg: 'Failed to save'})
                 }
@@ -54,7 +75,17 @@ var functions = {
         else {
             return res.json({success: false, msg: 'No Headers'})
         }
-    }
+    },
+    getuser: function(req,res){
+        User.findOne({firstname=res.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                return user}
+    })
+}
 }
 
 module.exports = functions
