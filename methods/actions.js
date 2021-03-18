@@ -1,5 +1,4 @@
 var User = require('../models/user')
-var Iron = require('../models/iron')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 
@@ -16,26 +15,6 @@ var functions = {
                 emailaddress: req.body.emailaddress
             });
             newUser.save(function (err, newUser) {
-                if (err) {
-                    res.json({success: false, msg: 'Failed to save'})
-                }
-                else {
-                    res.json({success: true, msg: 'Successfully saved'})
-                }
-            })
-        }
-    },
-    addIron: function (req, res) {
-        if ((!req.body.date) ||(!req.body.medicine) || (!req.body.unitstaken)) {
-            res.json({success: false, msg: 'Enter all fields'})
-        }
-        else {
-            var newIron = Iron({
-                date: req.body.date,
-                medicine: req.body.medicine,
-                unitstaken: req.body.unitstaken
-            });
-            newIron.save(function (err, newIron) {
                 if (err) {
                     res.json({success: false, msg: 'Failed to save'})
                 }
