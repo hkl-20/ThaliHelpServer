@@ -13,6 +13,10 @@ var userSchema = new Schema({
     password: {
         type: String,
         require: true
+    },
+    emailaddress:{
+        type: String,
+        require: true
     }
 })
 

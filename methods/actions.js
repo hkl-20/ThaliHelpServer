@@ -11,7 +11,8 @@ var functions = {
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                password: req.body.password
+                password: req.body.password,
+                emailaddress: req.body.emailaddress
             });
             newUser.save(function (err, newUser) {
                 if (err) {
