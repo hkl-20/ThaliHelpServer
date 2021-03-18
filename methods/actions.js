@@ -54,17 +54,18 @@ var functions = {
         else {
             return res.json({success: false, msg: 'No Headers'})
         }
-    },
-    getuser: function(req,res){
-        User.findOne({firstname=res.body.firstname}, function (err, user) {
-            if (err) throw err
-            if (!user) {
-                res.status(403).send({success: false, msg: 'User not found'})
-            }
-            else {
-                return res.json({success: true,userinfo: user})}
-    })
-}
+    }
+//     ,
+//     getuser: function(req,res){
+//         User.findOne({firstname=res.body.firstname}, function (err, user) {
+//             if (err) throw err
+//             if (!user) {
+//                 res.status(403).send({success: false, msg: 'User not found'})
+//             }
+//             else {
+//                 return res.json({success: true,userinfo: user})}
+//     })
+// }
 }
 
 module.exports = functions
