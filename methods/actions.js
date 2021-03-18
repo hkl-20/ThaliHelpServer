@@ -9,18 +9,9 @@ var functions = {
         }
         else {
             var newUser = User({
-                UserId: req.body.UserId,
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                emailaddress: req.body.emailaddress,
-                backupemail: req.body.backupemail,
-                phone: req.body.phone,
-                age: req.body.age,
-                gender: req.body.gender,
-                datejoined:req.body.datejoined,
-                password: req.body.password,
-                alarms: req.body.alarms,
-                journalid: req.body.journalid
+                password: req.body.password
             });
             newUser.save(function (err, newUser) {
                 if (err) {
