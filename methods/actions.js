@@ -4,13 +4,23 @@ var config = require('../config/dbconfig')
 
 var functions = {
     addNew: function (req, res) {
-        if ((!req.body.name) || (!req.body.password)) {
+        if ((!req.body.firstname) ||(!req.body.password) || (!req.body.lastname)) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
             var newUser = User({
-                name: req.body.name,
-                password: req.body.password
+                UserId: req.body.UserId,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                emailaddress: req.body.emailaddress,
+                backupemail: req.body.backupemail,
+                phone: req.body.phone,
+                age: req.body.age,
+                gender: req.body.gender,
+                datejoined:req.body.datejoined,
+                password: req.body.password,
+                alarms: req.body.alarms,
+                journalid: req.body.journalid
             });
             newUser.save(function (err, newUser) {
                 if (err) {
@@ -24,7 +34,7 @@ var functions = {
     },
     authenticate: function (req, res) {
         User.findOne({
-            name: req.body.name
+            firstname: req.body.firstname
         }, function (err, user) {
                 if (err) throw err
                 if (!user) {
