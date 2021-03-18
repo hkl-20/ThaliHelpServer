@@ -62,7 +62,7 @@ var functions = {
                 res.status(403).send({success: false, msg: 'User not found'})
             }
             else {
-                return user}
+                return res.json({success: true,userinfo: user})}
     })
 }
 }
