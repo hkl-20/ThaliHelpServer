@@ -11,6 +11,12 @@ var functions = {
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
+                emailaddress:req.body.emailaddress,
+                backupemail:req.body.backupemail,
+                phone: req.body.phone,
+                age:req.body.age,
+                gender: req.body.gender,
+                datejoined : req.body.datejoined,
                 password: req.body.password
                
             });

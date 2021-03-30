@@ -10,6 +10,30 @@ var userSchema = new Schema({
         type: String,
         require: true
     },
+    emailaddress:{
+        type: String,
+        require: true
+    },
+    backupemail:{
+        type: String,
+        require: true
+    },
+    phone:{
+        type:String,
+        require:true
+    },
+    age:{
+        type: Int32Array,
+        require: true
+    },
+    gender:{
+        type: String,
+        require: true
+    },
+    datejoined:{
+        type: String,
+        require: true
+    },
     password: {
         type: String,
         require: true

@@ -22,6 +22,6 @@ router.post('/authenticate', actions.authenticate)
 //@route GET /getinfo
 router.get('/getinfo', actions.getinfo)
 
-//router.get('/getuser',actions.getuser)
+router.get('/getuser',actions.getuser)
 
 module.exports = router
