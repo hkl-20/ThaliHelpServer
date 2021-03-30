@@ -63,7 +63,7 @@ var functions = {
     }
     ,
     getuser: function(req,res){
-        User.findOne({firstname:req.body.firstname}, function (err, user) {
+        User.findOne({firstname:req.body.firstname, lastname: req.body.lastname}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -71,6 +71,9 @@ var functions = {
             else {
                 return res.json({success: true,userinfo: user})}
     })
+    // getjournal: function(req,res){
+
+    // }
 }
 }
 
