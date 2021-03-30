@@ -23,7 +23,7 @@ var userSchema = new Schema({
         require:true
     },
     age:{
-        type: Int32Array,
+        type: Number,
         require: true
     },
     gender:{
