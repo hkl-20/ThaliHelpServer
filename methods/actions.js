@@ -71,33 +71,33 @@ var functions = {
                 res.status(403).send({success: false, msg: 'User not found'})
             }
             else {
-                return user
+                return  res.json({success: true, msg: user})
             }
         })
     }
-    ,
-    getjournal: function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
-            if (err) throw err
-            if (!user) {
-                res.status(403).send({success: false, msg: 'User not found'})
-            }
-            else {
-                Journal.findById({_id: user.journalid},function(err1,jour){
-                    if (err1) throw err1
-                    if (!jour){
-                        res.status(403).send({success: false, msg: 'Journal not found'})
-                    }
-                    else{
-                        return res.json({success: true, msg: jour})
-                    }
+    // ,
+    // getjournal: function(req,res){
+    //     User.findOne({
+    //         firstname:req.body.firstname}, function (err, user) {
+    //         if (err) throw err
+    //         if (!user) {
+    //             res.status(403).send({success: false, msg: 'User not found'})
+    //         }
+    //         else {
+    //             Journal.findById({_id: user.journalid},function(err1,jour){
+    //                 if (err1) throw err1
+    //                 if (!jour){
+    //                     res.status(403).send({success: false, msg: 'Journal not found'})
+    //                 }
+    //                 else{
+    //                     return res.json({success: true, msg: jour})
+    //                 }
                     
-                }
-                )
-            }
-        }) 
-    }
+    //             }
+    //             )
+    //         }
+    //     }) 
+    // }
 }
 
 module.exports = functions
