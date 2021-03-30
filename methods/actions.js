@@ -1,4 +1,5 @@
 var User = require('../models/user')
+var Journal=require('../models/journal')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 
@@ -63,18 +64,39 @@ var functions = {
     }
     ,
     getuser: function(req,res){
-        User.findOne({firstname:req.body.firstname, lastname: req.body.lastname}, function (err, user) {
+        User.findOne({
+            firstname:req.body.firstname, lastname: req.body.lastname}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
             }
             else {
-                return res.json({success: true,userinfo: user})}
-    })
-    // getjournal: function(req,res){
-
-    // }
-}
+                return user
+            }
+        })
+    },
+    getjournal: function(req,res){
+        User.findOne({
+            firstname:req.body.firstname, lastname: req.body.lastname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                Journal.findById({_id: user.journalid},function(err,jour){
+                    if (err) throw err
+                    if (!jour){
+                        res.status(403).send({success: false, msg: 'User not found'})
+                    }
+                    else{
+                        return res.json({success: true, msg: jour})
+                    }
+                    
+                }
+                )
+            }
+        }) 
+    }
 }
 
 module.exports = functions
