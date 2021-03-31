@@ -95,7 +95,7 @@ var functions = {
                     
                 // }
                 // )
-                return res.json({sucess:true, msg: user.journalid})
+                return res.json({sucess:true, msg: user[journalid]})
             }
         }) 
     }
