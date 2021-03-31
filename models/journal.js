@@ -5,8 +5,7 @@ var journalSchema = new Schema({
     bloodpressuredata: [{
         date:String,
         diastolicpressure:Number,
-        systolicpressure:Number,
-        bp:Number
+        systolicpressure:Number
     }],
     ironintake:[
         {
@@ -19,7 +18,6 @@ var journalSchema = new Schema({
         {
            date: String,
            age: Number,
-           heartrate: Number,
            antibodies: Number,
            amounttransfused: Number 
         }
@@ -37,7 +35,14 @@ var journalSchema = new Schema({
         time: String,
         medicinename:String,
         unitstaken:Number
-    }]
+    }],
+    heartrate:[
+        {
+            date: String,
+            time: String,
+            bpm: Number
+        }
+    ]
 
 
 })

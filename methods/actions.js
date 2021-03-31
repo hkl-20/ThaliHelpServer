@@ -131,6 +131,44 @@ var functions = {
                 )
             }
         }) 
+    },
+    addbp:function(req,res){
+        User.findOne({
+            firstname:req.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var bpdtemp = journaldata.bloodpressuredata
+                        bpd.push({"date":req.body.date, "diastolicpressure":req.body.diastolicpressure ,"systolicpressure":req.body.systolicpressure })
+                        Journal.findOneAndUpdate({_id: id},{bloodpressuredata: bpd },function(err2,jour2){
+                            if (err2) throw err2
+                            if (!jour2){
+                                res.status(403).send({success: false, msg: 'no scen hose'})
+                            }
+                            else{
+                                return res.json({success: true, msg: jour2})
+                            }
+                            
+                        }
+                        )
+                    }
+                    
+                }
+                )
+                
+            }
+        })
     }
 }
 
