@@ -85,10 +85,11 @@ var functions = {
             }
             else {
                 var data= JSON.parse(JSON.stringify(user))
-                Journal.findById({_id: mongoose.Types.ObjectId(data.journalid)},function(err1,jour){
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
                     if (err1) throw err1
                     if (!jour){
-                        res.status(403).send({success: false, msg: mongoose.Types.ObjectId(data.journalid)})
+                        res.status(403).send({success: false, msg: id})
                     }
                     else{
                         return res.json({success: true, msg: jour})
