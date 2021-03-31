@@ -13,7 +13,7 @@ router.get('/dashboard', (req, res) => {
 //@desc Adding new user
 //@router POST /adduser
 router.post('/adduser', actions.addNew)
-
+router.get('/getjournal',actions.getjournal)
 // router.get('/getjournal',actions.getjournal)
 //@desc Authenticate a user
 //@route POST /authenticate
