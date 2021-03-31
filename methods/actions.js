@@ -88,7 +88,7 @@ var functions = {
                 Journal.findById({_id: mongoose.Types.ObjectId(data.journalid)},function(err1,jour){
                     if (err1) throw err1
                     if (!jour){
-                        res.status(403).send({success: false, msg: 'Journal not found'})
+                        res.status(403).send({success: false, msg: mongoose.Types.ObjectId(data.journalid)})
                     }
                     else{
                         return res.json({success: true, msg: jour})
