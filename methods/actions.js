@@ -95,7 +95,7 @@ var functions = {
                     
                 // }
                 // )
-                var obj = JSON.parse(user);
+                var obj = JSON.parse(user.body);
                 return res.json({sucess:true, msg: obj.journalid})
             }
         }) 
