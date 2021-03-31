@@ -226,7 +226,7 @@ var functions = {
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
                         var hr = journaldata.heartrate
-                        iron.push({"date":req.body.date, "time":req.body.time,"bpm":req.body.bpm })
+                        hr.push({"date":req.body.date, "time":req.body.time,"bpm":req.body.bpm })
                         Journal.findOneAndUpdate({_id: id},{heartrate:hr },function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
