@@ -88,6 +88,24 @@ var functions = {
                 }
 
             })
+    },
+    postajournal:function(req,res){
+        if ((!req.body.dummyname)) {
+        res.json({success: false, msg: 'Enter all fields'})
+    }
+    else {
+        var newUser = Journal({dummyvalue:req.body.dummyvalue
+        });
+        newUser.save(function (err, newUser) {
+            if (err) {
+                res.json({success: false, msg: 'Failed to save'})
+            }
+            else {
+                res.json({success: true, msg: 'Successfully saved'})
+            }
+        })
+    }
+
     }
     ,
     getjournal: function(req,res){

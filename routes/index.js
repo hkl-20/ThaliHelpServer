@@ -15,6 +15,7 @@ router.get('/dashboard', (req, res) => {
 router.post('/adduser', actions.addNew)
 router.get('/getjournal',actions.getjournal)
 router.get('/getone',actions.getone)
+router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)
 //@desc Authenticate a user
 //@route POST /authenticate
