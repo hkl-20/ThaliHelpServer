@@ -157,7 +157,83 @@ var functions = {
                                 res.status(403).send({success: false, msg: 'no scen hose'})
                             }
                             else{
-                                return res.json({success: true, msg: jour2})
+                                return res.json({success: true, msg:'updated'})
+                            }
+                            
+                        }
+                        )
+                    }
+                    
+                }
+                )
+                
+            }
+        })
+    },
+    addiron:function(req,res){
+        User.findOne({
+            firstname:req.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var iron = journaldata.ironintake
+                        iron.push({"date":req.body.date, "medicinename":req.body.medicinename ,"unitstaken":req.body.unitstaken })
+                        Journal.findOneAndUpdate({_id: id},{ironintake:iron },function(err2,jour2){
+                            if (err2) throw err2
+                            if (!jour2){
+                                res.status(403).send({success: false, msg: 'no scen hose'})
+                            }
+                            else{
+                                return res.json({success: true, msg: 'updated'})
+                            }
+                            
+                        }
+                        )
+                    }
+                    
+                }
+                )
+                
+            }
+        })
+    },
+    addheartrate:function(req,res){
+        User.findOne({
+            firstname:req.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var hr = journaldata.heartrate
+                        iron.push({"date":req.body.date, "time":req.body.time,"bpm":req.body.bpm })
+                        Journal.findOneAndUpdate({_id: id},{heartrate:hr },function(err2,jour2){
+                            if (err2) throw err2
+                            if (!jour2){
+                                res.status(403).send({success: false, msg: 'no scen hose'})
+                            }
+                            else{
+                                return res.json({success: true, msg: 'updated'})
                             }
                             
                         }
@@ -170,6 +246,7 @@ var functions = {
             }
         })
     }
+
 }
 
 module.exports = functions
