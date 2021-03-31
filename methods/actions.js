@@ -149,7 +149,7 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var bpdtemp = journaldata.bloodpressuredata
+                        var bpd = journaldata.bloodpressuredata
                         bpd.push({"date":req.body.date, "diastolicpressure":req.body.diastolicpressure ,"systolicpressure":req.body.systolicpressure })
                         Journal.findOneAndUpdate({_id: id},{bloodpressuredata: bpd },function(err2,jour2){
                             if (err2) throw err2
