@@ -95,7 +95,7 @@ var functions = {
                     
                 // }
                 // )
-                var data =JSON.parse(user);
+                var data= JSON.parse(JSON.stringify(user))
                 return res.json({sucess:true, msg: data["journalid"]})
             }
         }) 
