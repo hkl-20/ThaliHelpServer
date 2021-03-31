@@ -2,7 +2,7 @@ var User = require('../models/user')
 var Journal=require('../models/journal')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
-
+var mongoose = require('mongoose')
 var functions = {
     addNew: function (req, res) {
         if ((!req.body.firstname) ||(!req.body.password) || (!req.body.lastname)) {
@@ -85,7 +85,7 @@ var functions = {
             }
             else {
                 var data= JSON.parse(JSON.stringify(user))
-                Journal.findById({_id: data.journalid},function(err1,jour){
+                Journal.findById({_id: mongoose.Types.ObjectId(data.journalid)},function(err1,jour){
                     if (err1) throw err1
                     if (!jour){
                         res.status(403).send({success: false, msg: 'Journal not found'})
