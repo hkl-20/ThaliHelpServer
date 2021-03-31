@@ -90,7 +90,7 @@ var functions = {
             })
     },
     postajournal:function(req,res){
-        if ((!req.body.dummyname)) {
+        if ((!req.body.dummyvalue)) {
         res.json({success: false, msg: 'Enter all fields'})
     }
     else {
