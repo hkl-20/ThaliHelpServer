@@ -75,6 +75,20 @@ var functions = {
             }
         })
     }
+    ,getone:function(req,res){
+        var data=new mongoose.Types.ObjectId(req.body.id)
+        Journal.findOne({
+            _id:data},function(err,jour){
+                if (err) throw err
+                if (!jour){
+                    res.status(403).send({success: false, msg: 'User not found'})
+                }
+                else{
+                    return res.json({success: true, msg: jour})
+                }
+
+            })
+    }
     ,
     getjournal: function(req,res){
         User.findOne({
