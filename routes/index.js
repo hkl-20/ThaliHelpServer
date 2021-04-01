@@ -24,6 +24,8 @@ router.get('/getalliron',actions.getalliron)
 
 router.get('/getallheartrate',actions.getallheartrate)
 
+router.get('/getrecentbp',actions.getrecentbp)
+
 router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)
 //@desc Authenticate a user

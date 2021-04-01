@@ -298,6 +298,7 @@ var functions = {
             }
         })
     },
+    
     getallheartrate:function(req,res){
         User.findOne({
             firstname:req.body.firstname}, function (err, user) {
@@ -323,8 +324,34 @@ var functions = {
                 
             }
         })
+    },
+    getrecentbp:function(req,res){
+        User.findOne({
+            firstname:req.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var bp = journaldata.bloodpressuredata
+                        var recent= bp[bp.length -1]
+                        return res.json({success: true, msg: recent})
+                    }
+                }
+                )
+                
+            }
+        })
     }
-
 }
 
 module.exports = functions
