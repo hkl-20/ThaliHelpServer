@@ -263,7 +263,7 @@ var functions = {
                 var data= JSON.parse(JSON.stringify(user))
                 var id = new mongoose.Types.ObjectId(data.journalid)
                 Journal.findById({_id: id},function(err1,jour){
-                    if (err1) throw err1
+                    if (err1) throw err1    
                     if (!jour){
                         res.status(403).send({success: false, msg: "no journal found"})
                     }
@@ -272,44 +272,6 @@ var functions = {
                         var hr = journaldata.heartrate
                         hr.push({"date":req.body.date, "time":req.body.time,"bpm":req.body.bpm })
                         Journal.findOneAndUpdate({_id: id},{heartrate:hr },function(err2,jour2){
-                            if (err2) throw err2
-                            if (!jour2){
-                                res.status(403).send({success: false, msg: 'no scen hose'})
-                            }
-                            else{
-                                return res.json({success: true, msg: 'updated'})
-                            }
-                            
-                        }
-                        )
-                    }
-                    
-                }
-                )
-                
-            }
-        })
-    },
-    addbt:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
-            if (err) throw err
-            if (!user) {
-                res.status(403).send({success: false, msg: 'User not found'})
-            }
-            else {
-                var data= JSON.parse(JSON.stringify(user))
-                var id = new mongoose.Types.ObjectId(data.journalid)
-                Journal.findById({_id: id},function(err1,jour){
-                    if (err1) throw err1
-                    if (!jour){
-                        res.status(403).send({success: false, msg: "no journal found"})
-                    }
-                    else{
-                        var journaldata= JSON.parse(JSON.stringify(jour))
-                        var hr = journaldata.bloodtransfusion
-                        hr.push({"date":req.body.date, "age":req.body.age,"antibodies":req.body.antibodies,"amounttransfused":req.body.amounttransfused})
-                        Journal.findOneAndUpdate({_id: id},{bloodtransfusion:bt},function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
                                 res.status(403).send({success: false, msg: 'no scen hose'})

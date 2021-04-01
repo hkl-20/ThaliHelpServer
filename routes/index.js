@@ -53,5 +53,5 @@ router.post('/appendtoiron',actions.addiron)
 
 router.post('/appendtoheartrate',actions.addheartrate)
 
-router.post('/appendtobt',actions.addbt)
+router.post('/appendtobt',actions.addtranfusion)
 module.exports = router
