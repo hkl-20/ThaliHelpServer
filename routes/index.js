@@ -25,9 +25,15 @@ router.get('/getalliron',actions.getalliron)
 
 router.get('/getallheartrate',actions.getallheartrate)
 
+router.get('/getalltransfusion',actions.getalltransfusion)
+
 router.get('/getrecentbp',actions.getrecentbp)
+
 router.get('/getrecentiron',actions.getrecentiron)
+
 router.get('/getrecentheartrate',actions.getrecentheartrate)
+
+router.get('/getrecenttransfusion',actions.getrecenttranfusion)
 
 router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)
@@ -47,5 +53,5 @@ router.post('/appendtoiron',actions.addiron)
 
 router.post('/appendtoheartrate',actions.addheartrate)
 
-router.post('/appendtobt',actions.addbt)
+router.post('/appendtotransfusion',actions.addtranfusion)
 module.exports = router
