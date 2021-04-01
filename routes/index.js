@@ -20,6 +20,10 @@ router.get('/getone',actions.getone)
 
 router.get('/getallbp',actions.getallbp)
 
+router.get('/getalliron',actions.getalliron)
+
+router.get('/getallheartrate',actions.getallheartrate)
+
 router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)
 //@desc Authenticate a user
