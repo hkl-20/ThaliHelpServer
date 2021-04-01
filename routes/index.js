@@ -25,6 +25,8 @@ router.get('/getalliron',actions.getalliron)
 router.get('/getallheartrate',actions.getallheartrate)
 
 router.get('/getrecentbp',actions.getrecentbp)
+router.get('/getrecentiron',actions.getrecentiron)
+router.get('/getrecentheartrate',actions.getrecentheartrate)
 
 router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)

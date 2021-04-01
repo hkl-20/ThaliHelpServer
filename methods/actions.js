@@ -351,6 +351,60 @@ var functions = {
                 
             }
         })
+    },
+    getrecentiron:function(req,res){
+        User.findOne({
+            firstname:req.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var iron = journaldata.ironintake
+                        var recent= iron[iron.length -1]
+                        return res.json({success: true, msg: recent})
+                    }
+                }
+                )
+                
+            }
+        })
+    },
+    getrecentheartrate:function(req,res){
+        User.findOne({
+            firstname:req.body.firstname}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var hr = journaldata.heartrate
+                        var recent= hr[hr.length -1]
+                        return res.json({success: true, msg: recent})
+                    }
+                }
+                )
+                
+            }
+        })
     }
 }
 
