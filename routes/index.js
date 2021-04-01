@@ -1,3 +1,4 @@
+const { request } = require('express')
 const express = require('express')
 const actions = require('../methods/actions')
 const router = express.Router()
@@ -45,4 +46,6 @@ router.post('/appendtobp',actions.addbp)
 router.post('/appendtoiron',actions.addiron)
 
 router.post('/appendtoheartrate',actions.addheartrate)
+
+router.post('/appendtobt',actions.addbt)
 module.exports = router
