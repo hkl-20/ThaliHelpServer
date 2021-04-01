@@ -42,7 +42,7 @@ var journalSchema = new Schema({
             time: String,
             bpm: Number
         }
-    ]
+    ],
 
 
 })
