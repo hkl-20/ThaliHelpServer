@@ -18,6 +18,8 @@ router.get('/getjournal',actions.getjournal)
 
 router.get('/getone',actions.getone)
 
+router.get('/getallbp',actions.getallbp)
+
 router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)
 //@desc Authenticate a user
