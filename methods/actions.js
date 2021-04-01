@@ -188,7 +188,7 @@ var functions = {
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
                         var bt = journaldata.bloodtransfusion
-                        bt.push({"date":req.body.date,"antibodies":req.body.antibodies,"amounttranfused":req.body.amounttranfused })
+                        bt.push({"date":req.body.date,"heartrate":req.body.heartrate,"antibodies":req.body.antibodies,"amounttranfused":req.body.amounttranfused })
                         Journal.findOneAndUpdate({_id: id},{bloodtransfusion:bt },function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
