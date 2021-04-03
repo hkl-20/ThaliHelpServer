@@ -47,7 +47,7 @@ router.get('/getinfo', actions.getinfo)
 
 router.get('/getuser',actions.getuser)
 
-router.post('/appendtobp',actions.addbp)
+router.put('/appendtobp',actions.addbp)
 
 router.post('/appendtoiron',actions.addiron)
 
