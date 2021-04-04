@@ -409,8 +409,9 @@ var functions = {
         })
     },
     getrecentbp:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -434,8 +435,9 @@ var functions = {
         })
     },
     getrecenttranfusion:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -459,8 +461,9 @@ var functions = {
         })
     },
     getrecentiron:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -484,8 +487,9 @@ var functions = {
         })
     },
     getrecentheartrate:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
