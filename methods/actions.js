@@ -133,7 +133,7 @@ var functions = {
         }) 
     },
     addbp:function(req,res){
-        if ((!req.body.id || !req,body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
+        if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
@@ -176,7 +176,7 @@ var functions = {
         })}
     },
     addtranfusion:function(req,res){
-        if ((!req.body.id || !req,body.date || !req.body.age || !req.body.heartrate ||!req.body.antibodies || !req.body.amounttransfused)) {
+        if ((!req.body.id || !req.body.date || !req.body.age || !req.body.heartrate ||!req.body.antibodies || !req.body.amounttransfused)) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
@@ -225,7 +225,7 @@ var functions = {
         })}
     },
     addiron:function(req,res){
-        if ((!req.body.id || !req,body.date || !req.body.medicinename || !req.body.unitstaken)) {
+        if ((!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
@@ -268,7 +268,7 @@ var functions = {
         })}
     },
     addheartrate:function(req,res){
-        if ((!req.body.id || !req,body.date || !req.body.time || !req.body.bpm)) {
+        if ((!req.body.id || !req.body.date || !req.body.time || !req.body.bpm)) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
