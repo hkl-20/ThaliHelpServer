@@ -461,7 +461,7 @@ var functions = {
         })
     },
     getrecentiron:function(req,res){
-        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({
             _id:id1}, function (err, user) {
             if (err) throw err
@@ -487,7 +487,7 @@ var functions = {
         })
     },
     getrecentheartrate:function(req,res){
-        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({
             _id:id1}, function (err, user) {
             if (err) throw err
