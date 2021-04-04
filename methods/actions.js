@@ -133,6 +133,10 @@ var functions = {
         }) 
     },
     addbp:function(req,res){
+        if ((!req.body.id || !req,body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
         var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
             _id: id1}, function (err, user) {
@@ -169,11 +173,16 @@ var functions = {
                 )
                 
             }
-        })
+        })}
     },
     addtranfusion:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        if ((!req.body.id || !req,body.date || !req.body.age || !req.body.heartrate ||!req.body.antibodies || !req.body.amounttransfused)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -213,11 +222,16 @@ var functions = {
                 )
                 
             }
-        })
+        })}
     },
     addiron:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        if ((!req.body.id || !req,body.date || !req.body.medicinename || !req.body.unitstaken)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id : id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -251,11 +265,16 @@ var functions = {
                 )
                 
             }
-        })
+        })}
     },
     addheartrate:function(req,res){
-        User.findOne({
-            firstname:req.body.firstname}, function (err, user) {
+        if ((!req.body.id || !req,body.date || !req.body.time || !req.body.bpm)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
             if (err) throw err
             if (!user) {
                 res.status(403).send({success: false, msg: 'User not found'})
@@ -289,7 +308,7 @@ var functions = {
                 )
                 
             }
-        })
+        })}
     },
     getallbp:function(req,res){
         User.findOne({
