@@ -49,9 +49,10 @@ router.get('/getuser',actions.getuser)
 
 router.put('/appendtobp',actions.addbp)
 
-router.post('/appendtoiron',actions.addiron)
+router.put('/appendtoiron',actions.addiron)
 
-router.post('/appendtoheartrate',actions.addheartrate)
+router.put('/appendtoheartrate',actions.addheartrate)
 
-router.post('/appendtobt',actions.addtranfusion)
+router.put('/appendtobt',actions.addtranfusion)
+
 module.exports = router
