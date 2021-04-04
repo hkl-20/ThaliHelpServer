@@ -50,7 +50,8 @@ var functions = {
                         }
                     })
                 }
-        })
+            }
+        )
     },
     getinfo: function (req, res) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -75,7 +76,8 @@ var functions = {
             }
         })
     }
-    ,getone:function(req,res){
+    ,
+    getone:function(req,res){
         var data=new mongoose.Types.ObjectId(req.body.id)
         Journal.findOne({
             _id:data},function(err,jour){
@@ -127,8 +129,7 @@ var functions = {
                         return res.json({success: true, msg: jour})
                     }
                     
-                }
-                )
+                })
             }
         }) 
     },
@@ -155,7 +156,11 @@ var functions = {
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
                         var bpd = journaldata.bloodpressuredata
-                        bpd.push({"date":req.body.date, "diastolicpressure":req.body.diastolicpressure ,"systolicpressure":req.body.systolicpressure })
+                        bpd.push({
+                            "date":req.body.date,
+                            "diastolicpressure":req.body.diastolicpressure,
+                            "systolicpressure":req.body.systolicpressure
+                        })
                         Journal.findOneAndUpdate({_id: id},{bloodpressuredata: bpd },function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
@@ -165,15 +170,12 @@ var functions = {
                                 return res.json({success: true, msg:'updated'})
                             }
                             
-                        }
-                        )
-                    }
-                    
-                }
-                )
-                
+                        })
+                    }    
+                })    
             }
-        })}
+        })
+        }
     },
     addtranfusion:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.age || !req.body.heartrate ||!req.body.antibodies || !req.body.amounttransfused)) {
@@ -214,15 +216,12 @@ var functions = {
                                 return res.json({success: true, msg:'updated'})
                             }
                             
-                        }
-                        )
-                    }
-                    
-                }
-                )
-                
+                        })
+                    } 
+                })    
             }
-        })}
+        })
+        }
     },
     addiron:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) {
@@ -247,7 +246,11 @@ var functions = {
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
                         var iron = journaldata.ironintake
-                        iron.push({"date":req.body.date, "medicinename":req.body.medicinename ,"unitstaken":req.body.unitstaken })
+                        iron.push({
+                            "date":req.body.date,
+                            "medicinename":req.body.medicinename,
+                            "unitstaken":req.body.unitstaken
+                        })
                         Journal.findOneAndUpdate({_id: id},{ironintake:iron },function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
@@ -257,15 +260,12 @@ var functions = {
                                 return res.json({success: true, msg: 'updated'})
                             }
                             
-                        }
-                        )
-                    }
-                    
-                }
-                )
-                
+                        })
+                    }    
+                })
             }
-        })}
+        })
+        }
     },
     addheartrate:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.time || !req.body.bpm)) {
@@ -290,7 +290,11 @@ var functions = {
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
                         var hr = journaldata.heartrate
-                        hr.push({"date":req.body.date, "time":req.body.time,"bpm":req.body.bpm })
+                        hr.push({
+                            "date":req.body.date,
+                            "time":req.body.time,
+                            "bpm":req.body.bpm
+                        })
                         Journal.findOneAndUpdate({_id: id},{heartrate:hr },function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
@@ -300,15 +304,12 @@ var functions = {
                                 return res.json({success: true, msg: 'updated'})
                             }
                             
-                        }
-                        )
-                    }
-                    
-                }
-                )
-                
+                        })
+                    }  
+                })
             }
-        })}
+        })
+        }
     },
     getallbp:function(req,res){
         User.findOne({
@@ -330,9 +331,7 @@ var functions = {
                         var bpd = journaldata.bloodpressuredata
                         return res.json({success: true, msg: bpd})
                     }
-                }
-                )
-                
+                })
             }
         })
     },
@@ -356,9 +355,7 @@ var functions = {
                         var bt = journaldata.bloodtransfusion
                         return res.json({success: true, msg: bt})
                     }
-                }
-                )
-                
+                })
             }
         })
     },
@@ -382,9 +379,7 @@ var functions = {
                         var iron = journaldata.ironintake
                         return res.json({success: true, msg: iron})
                     }
-                }
-                )
-                
+                })
             }
         })
     },
@@ -409,9 +404,7 @@ var functions = {
                         var heartrate = journaldata.heartrate
                         return res.json({success: true, msg: heartrate})
                     }
-                }
-                )
-                
+                })
             }
         })
     },
@@ -436,9 +429,7 @@ var functions = {
                         var recent= bp[bp.length -1]
                         return res.json({success: true, msg: recent})
                     }
-                }
-                )
-                
+                })
             }
         })
     },
@@ -463,9 +454,7 @@ var functions = {
                         var recent= bt[bt.length -1]
                         return res.json({success: true, msg: recent})
                     }
-                }
-                )
-                
+                }) 
             }
         })
     },
@@ -490,9 +479,7 @@ var functions = {
                         var recent= iron[iron.length -1]
                         return res.json({success: true, msg: recent})
                     }
-                }
-                )
-                
+                })    
             }
         })
     },
@@ -517,9 +504,7 @@ var functions = {
                         var recent= hr[hr.length -1]
                         return res.json({success: true, msg: recent})
                     }
-                }
-                )
-                
+                })
             }
         })
     }
