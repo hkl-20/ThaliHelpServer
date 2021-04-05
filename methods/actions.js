@@ -178,7 +178,7 @@ var functions = {
         }
     },
     addtranfusion:function(req,res){
-        if ((!req.body.id || !req.body.date || !req.body.age || !req.body.heartrate ||!req.body.antibodies || !req.body.amounttransfused)) {
+        if ((!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused)) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
@@ -203,8 +203,7 @@ var functions = {
                         bt.push({
                             "date":req.body.date,
                             "age":req.body.age,
-                            "heartrate":req.body.heartrate,
-                            "antibodies":req.body.antibodies,
+                            "whitebloodcells":req.body.whitebloodcells,
                             "amounttransfused":req.body.amounttransfused 
                         })
                         Journal.findOneAndUpdate({_id: id},{bloodtransfusion:bt },function(err2,jour2){

@@ -18,8 +18,7 @@ var journalSchema = new Schema({
         {
            date: String,
            age: Number,
-           heartrate: Number,
-           antibodies: Number,
+           whitebloodcells: Number,
            amounttransfused: Number 
         }
     ],
