@@ -9,7 +9,7 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var jourid = postajournal().id
+            var jourid = this.postajournal({}).id
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
