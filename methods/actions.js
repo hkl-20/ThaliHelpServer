@@ -9,8 +9,8 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var jour = functions.postajournal()
-            return res.json({msg:jour});
+            //var jour = functions.postajournal()
+            //return res.json({msg:jour});
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -22,7 +22,7 @@ var functions = {
                 datejoined : req.body.datejoined,
                 password: req.body.password,
                 alarms : [],
-                journalid: jour.id
+            //    journalid: jour.id
 
                
             });
@@ -95,27 +95,27 @@ var functions = {
 
             })
     },
-    postajournal:function(_req,res){
-        var newJour = Journal({
-            bloodpressuredata:[],
-            ironintake:[],
-            bloodtransfusion:[],
-            DoctorVisits:[],
-            MedicineIntake:[],
-            heartrate:[]
-        });
-        newJour.save(function (err, Jour) {
-            if (err) {
-                return res.json({success: false, msg: 'Failed to save'})
-            }
-            else {
-                return res.json({success: true, msg: 'Successfully saved', id: Jour._id })
-            }
-        })
-    }
+    // postajournal:function(_req,res){
+    //     var newJour = Journal({
+    //         bloodpressuredata:[],
+    //         ironintake:[],
+    //         bloodtransfusion:[],
+    //         DoctorVisits:[],
+    //         MedicineIntake:[],
+    //         heartrate:[]
+    //     });
+    //     newJour.save(function (err, Jour) {
+    //         if (err) {
+    //             return res.json({success: false, msg: 'Failed to save'})
+    //         }
+    //         else {
+    //             return res.json({success: true, msg: 'Successfully saved', id: Jour._id })
+    //         }
+    //     })
+    // }
 
     
-    ,
+    // ,
     getjournal: function(req,res){
        var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
