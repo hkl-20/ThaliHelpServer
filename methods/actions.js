@@ -103,12 +103,12 @@ var functions = {
             MedicineIntake:[],
             heartrate:[]
         });
-        newJour.save(function (err, newJour) {
+        newJour.save(function (err, Jour) {
             if (err) {
                 res.json({success: false, msg: 'Failed to save'})
             }
             else {
-                res.json({success: true, msg: 'Successfully saved', id:newJour._id })
+                res.json({success: true, msg: 'Successfully saved', id:Jour._id })
             }
         })
     }
