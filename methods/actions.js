@@ -9,10 +9,8 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var jour;
-            functions.postajournal(function(err,ans){
-                jour = ans.id
-            })
+            var jour = functions.postajournal()
+            return res.json({msg:jour});
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -24,7 +22,7 @@ var functions = {
                 datejoined : req.body.datejoined,
                 password: req.body.password,
                 alarms : [],
-                journalid: jour
+                journalid: jour.id
 
                
             });
