@@ -9,32 +9,44 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var j;
-            j=functions.postajournal({},j);
-            //return res.json({msg:jour});
-            var newUser = User({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                emailaddress:req.body.emailaddress,
-                backupemail:req.body.backupemail,
-                phone: req.body.phone,
-                age:req.body.age,
-                gender: req.body.gender,
-                datejoined : req.body.datejoined,
-                password: req.body.password,
-                alarms : [],
-            //    journalid: jour.id
-
-               
+            var newJour = Journal({
+                bloodpressuredata:[],
+               ironintake:[],
+               bloodtransfusion:[],
+               DoctorVisits:[],
+               MedicineIntake:[],
+               heartrate:[]
             });
-            newUser.save(function (err, newUser) {
-                if (err) {
-                    res.json({success: false, msg: 'Failed to save'})
-                }
-                else {
-                    res.json({success: true, msg: 'Successfully saved'})
-                }
-            })
+            newJour.save(function (err, newJour) {
+               if (err) {
+                   return res.json({success: false, msg: 'Failed to save'})
+               }
+               else {
+                var newUser = User({
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    emailaddress:req.body.emailaddress,
+                    backupemail:req.body.backupemail,
+                    phone: req.body.phone,
+                    age:req.body.age,
+                    gender: req.body.gender,
+                    datejoined : req.body.datejoined,
+                    password: req.body.password,
+                    alarms : [],
+                    journalid: newJour.id
+                   
+                });
+                newUser.save(function (err1, newUser) {
+                    if (err1) {
+                        res.json({success: false, msg: 'Failed to save'})
+                    }
+                    else {
+                        res.json({success: true, msg: 'Successfully saved'})
+                    }
+                })
+            }
+           })
+            
         }
     },
     authenticate: function (req, res) {
@@ -97,7 +109,7 @@ var functions = {
             })
     },
     postajournal:function(req,res){
-         var newJour = Journal({
+        var newJour = Journal({
              bloodpressuredata:[],
             ironintake:[],
             bloodtransfusion:[],
