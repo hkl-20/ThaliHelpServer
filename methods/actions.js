@@ -97,7 +97,7 @@ var functions = {
 
             })
     },
-     postajournal:function(_req,res){
+    postajournal:function(_req,res){
          var newJour = Journal({
              bloodpressuredata:[],
             ironintake:[],
@@ -106,12 +106,12 @@ var functions = {
             MedicineIntake:[],
             heartrate:[]
         });
-        newJour.save(function (err, Jour) {
+        newJour.save(function (err, newJour) {
             if (err) {
                 return res.json({success: false, msg: 'Failed to save'})
             }
             else {
-                return res.json({success: true, msg: 'Successfully saved', id: Jour._id })
+                return res.json({success: true, msg: newJour, id:newJour._id })
             }
         })
     }
