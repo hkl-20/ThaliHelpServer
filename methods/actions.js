@@ -9,7 +9,7 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var jourid = this.postajournal({}).id
+            var jourid = functions.postajournal({}).id
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -66,8 +66,7 @@ var functions = {
         else {
             return res.json({success: false, msg: 'No Headers'})
         }
-    }
-    ,
+    },
     getuser: function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
@@ -80,8 +79,7 @@ var functions = {
                 return  res.json({success: true, msg: user})
             }
         })
-    }
-    ,
+    },
     getone:function(req,res){
         var data=new mongoose.Types.ObjectId(req.body.id)
         Journal.findOne({
@@ -96,7 +94,7 @@ var functions = {
 
             })
     },
-    postajournal:function(req,res){
+    postajournal:function(_req,res){
         var newJour = Journal({
             bloodpressuredata:[],
             ironintake:[],
