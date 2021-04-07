@@ -37,7 +37,15 @@ var userSchema = new Schema({
     password: {
         type: String,
         require: true
-    }
+    },
+    alarms:[
+        {
+            medicinename: String,
+            time: String
+        }
+    ],
+    journalid: mongoose.ObjectID
+
 
 })
 

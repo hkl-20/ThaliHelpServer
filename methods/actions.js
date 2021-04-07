@@ -9,6 +9,7 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
+            var jourid = postajournal().id
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -18,7 +19,10 @@ var functions = {
                 age:req.body.age,
                 gender: req.body.gender,
                 datejoined : req.body.datejoined,
-                password: req.body.password
+                password: req.body.password,
+                alarms : [],
+                journalid: jourid
+
                
             });
             newUser.save(function (err, newUser) {
@@ -93,23 +97,25 @@ var functions = {
             })
     },
     postajournal:function(req,res){
-        if ((!req.body.dummyvalue)) {
-        res.json({success: false, msg: 'Enter all fields'})
-    }
-    else {
-        var newUser = Journal({dummyvalue:req.body.dummyvalue
+        var newJour = Journal({
+            bloodpressuredata:[],
+            ironintake:[],
+            bloodtransfusion:[],
+            DoctorVisits:[],
+            MedicineIntake:[],
+            heartrate:[]
         });
-        newUser.save(function (err, newUser) {
+        newJour.save(function (err, newJour) {
             if (err) {
                 res.json({success: false, msg: 'Failed to save'})
             }
             else {
-                res.json({success: true, msg: 'Successfully saved'})
+                res.json({success: true, msg: 'Successfully saved', id:newJour._id })
             }
         })
     }
 
-    }
+    
     ,
     getjournal: function(req,res){
        var id1 = new mongoose.Types.ObjectId(req.body.id)
@@ -135,6 +141,7 @@ var functions = {
             }
         }) 
     },
+    
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
             res.json({success: false, msg: 'Enter all fields'})
