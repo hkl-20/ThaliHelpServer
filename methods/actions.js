@@ -9,7 +9,7 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            var jourid = functions.postajournal({}).id
+            var jourid = functions.postajournal().id
             var newUser = User({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -105,10 +105,10 @@ var functions = {
         });
         newJour.save(function (err, Jour) {
             if (err) {
-                res.json({success: false, msg: 'Failed to save'})
+                return res.json({success: false, msg: 'Failed to save'})
             }
             else {
-                res.json({success: true, msg: 'Successfully saved', id:Jour._id })
+                return res.json({success: true, msg: 'Successfully saved', id: Jour._id })
             }
         })
     }
