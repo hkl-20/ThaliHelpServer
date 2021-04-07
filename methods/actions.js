@@ -95,27 +95,27 @@ var functions = {
 
             })
     },
-    // postajournal:function(_req,res){
-    //     var newJour = Journal({
-    //         bloodpressuredata:[],
-    //         ironintake:[],
-    //         bloodtransfusion:[],
-    //         DoctorVisits:[],
-    //         MedicineIntake:[],
-    //         heartrate:[]
-    //     });
-    //     newJour.save(function (err, Jour) {
-    //         if (err) {
-    //             return res.json({success: false, msg: 'Failed to save'})
-    //         }
-    //         else {
-    //             return res.json({success: true, msg: 'Successfully saved', id: Jour._id })
-    //         }
-    //     })
-    // }
+     postajournal:function(_req,res){
+         var newJour = Journal({
+             bloodpressuredata:[],
+            ironintake:[],
+            bloodtransfusion:[],
+            DoctorVisits:[],
+            MedicineIntake:[],
+            heartrate:[]
+        });
+        newJour.save(function (err, Jour) {
+            if (err) {
+                return res.json({success: false, msg: 'Failed to save'})
+            }
+            else {
+                return res.json({success: true, msg: 'Successfully saved', id: Jour._id })
+            }
+        })
+    }
 
     
-    // ,
+    ,
     getjournal: function(req,res){
        var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
