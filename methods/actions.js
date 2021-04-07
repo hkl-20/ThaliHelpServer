@@ -9,9 +9,8 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            functions.postajournal({},{'json': null},function(callback){
-                return res.json({msg: callback});
-            })
+            var j;
+            j=functions.postajournal({},j);
             //return res.json({msg:jour});
             var newUser = User({
                 firstname: req.body.firstname,
