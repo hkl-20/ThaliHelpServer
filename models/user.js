@@ -44,7 +44,7 @@ var userSchema = new Schema({
             time: String
         }
     ],
-    journalid: mongoose.ObjectID
+    journalid: mongoose.Types.ObjectId
 
 
 })
