@@ -9,7 +9,7 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            functions.postajournal({},{},function(callback){
+            functions.postajournal({},{json: null},function(callback){
                 return res.json({msg: callback});
             })
             //return res.json({msg:jour});
