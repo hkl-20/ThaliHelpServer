@@ -9,8 +9,8 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            functions.postajournal(function(err1,done){
-                return res.json({msg: done});
+            functions.postajournal(function(callback){
+                return res.json({msg: callback});
             })
             //return res.json({msg:jour});
             var newUser = User({
