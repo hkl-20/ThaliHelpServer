@@ -9,7 +9,7 @@ var functions = {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
-            functions.postajournal({},{json: null},function(callback){
+            functions.postajournal(function(callback){
                 return res.json({msg: callback});
             })
             //return res.json({msg:jour});
@@ -97,7 +97,7 @@ var functions = {
 
             })
     },
-    postajournal:function(req,res){
+    postajournal:function(_req,res){
          var newJour = Journal({
              bloodpressuredata:[],
             ironintake:[],
