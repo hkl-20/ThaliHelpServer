@@ -153,6 +153,38 @@ var functions = {
             }
         }) 
     },
+    addalarm:function(req,res){
+        if ((!req.body.time)|| (!req.body.id) || (!req.body.medicinename)){
+            res.json({success:false,msg:'Enter all fields'})
+        }
+        else{
+            var id= new mongoose.Types.ObjectId(req.body.id)
+            User.findById({_id: id},function(err,user){
+                if (err) throw err
+                if (!user){
+                    res.status(403).send({success: false, msg: 'User not found'})
+                }
+                else{
+                    var data=JSON.parse(JSON.stringify(user))
+                    var alarmsdata=data.alarms
+                    alarmsdata.push({
+                        'medicinename' : req.body.medicinename,
+                        'time': req.body.time
+                    })
+                    User.findOneAndUpdate({_id: id},{alarms: alarmsdata  },function(err1,user2){
+                        if (err1) throw err1
+                        if (!user2){
+                            res.status(403).send({success: false, msg: 'update unsuccessful'})
+                        }
+                        else{
+                            return res.json({success: true, msg:'updated'})
+                        }                    
+
+                })
+            }
+        })
+    }
+},
     
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {

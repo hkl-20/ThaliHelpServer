@@ -55,4 +55,6 @@ router.put('/appendtoheartrate',actions.addheartrate)
 
 router.put('/appendtobt',actions.addtranfusion)
 
+router.put('/appendtoalarm',actions.addalarm)
+
 module.exports = router
