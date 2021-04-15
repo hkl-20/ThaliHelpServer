@@ -71,16 +71,16 @@ var functions = {
             }
         )
     },
-    getinfo: function (req, res) {
-        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-            var token = req.headers.authorization.split(' ')[1]
-            var decodedtoken = jwt.decode(token, config.secret)
-            return res.json({success: true, msg: 'Hello ' + decodedtoken.name})
-        }
-        else {
-            return res.json({success: false, msg: 'No Headers'})
-        }
-    },
+    // getinfo: function (req, res) {
+    //     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    //         var token = req.headers.authorization.split(' ')[1]
+    //         var decodedtoken = jwt.decode(token, config.secret)
+    //         return res.json({success: true, msg: 'Hello ' + decodedtoken.name})
+    //     }
+    //     else {
+    //         return res.json({success: false, msg: 'No Headers'})
+    //     }
+    // },
     getuser: function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
@@ -94,20 +94,20 @@ var functions = {
             }
         })
     },
-    getone:function(req,res){
-        var data=new mongoose.Types.ObjectId(req.body.id)
-        Journal.findOne({
-            _id:data},function(err,jour){
-                if (err) throw err
-                if (!jour){
-                    res.status(403).send({success: false, msg: 'User not found'})
-                }
-                else{
-                    return res.json({success: true, msg: jour})
-                }
+    // getone:function(req,res){
+    //     var data=new mongoose.Types.ObjectId(req.body.id)
+    //     Journal.findOne({
+    //         _id:data},function(err,jour){
+    //             if (err) throw err
+    //             if (!jour){
+    //                 res.status(403).send({success: false, msg: 'User not found'})
+    //             }
+    //             else{
+    //                 return res.json({success: true, msg: jour})
+    //             }
 
-            })
-    },
+    //         })
+    // },
     postajournal:function(req,res){
         var newJour = Journal({
              bloodpressuredata:[],
@@ -125,10 +125,7 @@ var functions = {
                 return res.json({success: true, msg: newJour, id:newJour._id })
             }
         })
-    }
-
-    
-    ,
+    },
     getjournal: function(req,res){
        var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
@@ -184,8 +181,7 @@ var functions = {
             }
         })
     }
-},
-    
+    },
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
             res.json({success: false, msg: 'Enter all fields'})
@@ -363,6 +359,52 @@ var functions = {
         })
         }
     },
+    appendtoarray:function(req,res){
+        if ((!req.body.id || !req.body.date || !req.body.time || !req.body.bpm)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+        var a= req.body.type
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id:id1}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1    
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var arr = journaldata[req.body.type]
+                        if (req.body.type == 'heartrate'){
+                        arr.push({
+                            "date":req.body.date,
+                            "time":req.body.time,
+                            "bpm":req.body.bpm
+                        })}
+                        Journal.findOneAndUpdate({_id: id},{a : arr },function(err2,jour2){
+                            if (err2) throw err2
+                            if (!jour2){
+                                res.status(403).send({success: false, msg: 'no scen hose'})
+                            }
+                            else{
+                                return res.json({success: true, msg: 'updated'})
+                            }
+                            
+                        })
+                    }  
+                })
+            }
+        })
+        }
+    },
     getallbp:function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({
@@ -438,7 +480,6 @@ var functions = {
             }
         })
     },
-    
     getallheartrate:function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({

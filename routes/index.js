@@ -14,7 +14,7 @@ router.get('/dashboard', (req, res) => {
 //@desc Adding new user
 //@router POST /adduser
 router.post('/adduser', actions.addNew)
-
+router.put('/appendtoarray',actions.appendtoarray)
 router.get('/getjournal',actions.getjournal)
 
 router.get('/getone',actions.getone)
