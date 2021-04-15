@@ -17,7 +17,7 @@ router.post('/adduser', actions.addNew)
 
 router.get('/getjournal',actions.getjournal)
 
-router.get('/getone',actions.getone)
+// router.get('/getone',actions.getone)
 
 router.get('/getallbp',actions.getallbp)
 
@@ -43,7 +43,7 @@ router.post('/authenticate', actions.authenticate)
 
 //@desc Get info on a user
 //@route GET /getinfo
-router.get('/getinfo', actions.getinfo)
+// router.get('/getinfo', actions.getinfo)
 
 router.get('/getuser',actions.getuser)
 
