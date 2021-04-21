@@ -183,10 +183,10 @@ var functions = {
     }
     },
     addarr:function(req,res){
-        if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
-            res.json({success: false, msg: 'Enter all fields'})
-        }
-        else {
+        // if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
+        //     res.json({success: false, msg: 'Enter all fields'})
+        // }
+        // else {
         var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
             _id: id1}, function (err, user) {
@@ -276,7 +276,7 @@ var functions = {
                 })    
             }
         })
-        }
+        
     },
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
