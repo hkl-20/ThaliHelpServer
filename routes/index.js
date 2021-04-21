@@ -18,7 +18,7 @@ router.post('/adduser', actions.addNew)
 router.get('/getjournal',actions.getjournal)
 
 // router.get('/getone',actions.getone)
-
+router.get('/getalltype',actions.getalltype)
 router.get('/getallbp',actions.getallbp)
 
 router.get('/getalliron',actions.getalliron)

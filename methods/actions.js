@@ -94,20 +94,6 @@ var functions = {
             }
         })
     },
-    // getone:function(req,res){
-    //     var data=new mongoose.Types.ObjectId(req.body.id)
-    //     Journal.findOne({
-    //         _id:data},function(err,jour){
-    //             if (err) throw err
-    //             if (!jour){
-    //                 res.status(403).send({success: false, msg: 'User not found'})
-    //             }
-    //             else{
-    //                 return res.json({success: true, msg: jour})
-    //             }
-
-    //         })
-    // },
     postajournal:function(req,res){
         var newJour = Journal({
              bloodpressuredata:[],
@@ -182,8 +168,9 @@ var functions = {
         })
     }
     },
+
+
     addarr:function(req,res){
-        
         if ((req.body.what == 'bloodpressuredata' && (!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure))
             || (req.body.what == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
             || (req.body.what == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
@@ -256,8 +243,7 @@ var functions = {
                                 }
                                 else{
                                     return res.json({success: true, msg: 'updated'})
-                                }
-                                
+                                }   
                             })
                         }
                         else if (req.body.what == 'heartrate'){
@@ -273,16 +259,17 @@ var functions = {
                                 }
                                 else{
                                     return res.json({success: true, msg: 'updated'})
-                                }
-                                
+                                }    
                             })
                         }
                     }    
                 })    
             }
         })
-        
     }},
+
+
+
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
             res.json({success: false, msg: 'Enter all fields'})
@@ -460,7 +447,34 @@ var functions = {
         })
         }
     },
+
+    getalltype : function(req,res){
+        var id1 = new mongoose.Types.ObjectId(req.query.id)
+        User.findById({
+            _id: id1}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var entries = journaldata[req.query.what]
+                        return res.json({success: true, msg: entries})
+                    }
+                })
+            }
+        })
+    },
     
+
     getallbp:function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({
@@ -561,6 +575,7 @@ var functions = {
             }
         })
     },
+    
 
     getrecentbp:function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.query.id)
