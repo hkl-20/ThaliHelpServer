@@ -576,7 +576,31 @@ var functions = {
         })
     },
     
-
+    getrecenttype: function(req,res){
+        var id1 = new mongoose.Types.ObjectId(req.query.id)
+        User.findById({
+            _id:id1}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var entries = journaldata[req.query.what]
+                        var recent= entries[entries.length -1]
+                        return res.json({success: true, msg: recent})
+                    }
+                })
+            }
+        })},
     getrecentbp:function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({
