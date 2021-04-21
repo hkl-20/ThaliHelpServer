@@ -204,22 +204,74 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var bpd = journaldata[req.body.what]
-                        bpd.push({
-                            "date":req.body.date,
-                            "diastolicpressure":req.body.diastolicpressure,
-                            "systolicpressure":req.body.systolicpressure
-                        })
-                        Journal.findOneAndUpdate({_id: id},{bloodpressuredata: bpd },function(err2,jour2){
-                            if (err2) throw err2
-                            if (!jour2){
-                                res.status(403).send({success: false, msg:'Couldnt update'})
-                            }
-                            else{
-                                return res.json({success: true, msg:'updated'})
-                            }
-                            
-                        })
+                        var entry = journaldata[req.body.what]
+                        if (req.body.what == 'bloodpressuredata'){
+                            entry.push({
+                                "date":req.body.date,
+                                "diastolicpressure":req.body.diastolicpressure,
+                                "systolicpressure":req.body.systolicpressure
+                            })
+                            Journal.findOneAndUpdate({_id: id},{bloodpressuredata: entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg:'Couldnt update'})
+                                }
+                                else{
+                                    return res.json({success: true, msg:'updated'})
+                                }      
+                            })
+                        }
+                        else if (req.body.what == 'bloodtransfusion'){
+                            entry.push({
+                                "date":req.body.date,
+                                "age":req.body.age,
+                                "whitebloodcells":req.body.whitebloodcells,
+                                "amounttransfused":req.body.amounttransfused 
+                            })
+                            Journal.findOneAndUpdate({_id: id},{bloodtransfusion:entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg: 'no scen hose'})
+                                }
+                                else{
+                                    return res.json({success: true, msg:'updated'})
+                                }
+                            })
+                        }
+                        else if (req.body.what == 'ironintake'){
+                            entry.push({
+                                "date":req.body.date,
+                                "medicinename":req.body.medicinename,
+                                "unitstaken":req.body.unitstaken
+                            })
+                            Journal.findOneAndUpdate({_id: id},{ironintake:entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg: 'no scen hose'})
+                                }
+                                else{
+                                    return res.json({success: true, msg: 'updated'})
+                                }
+                                
+                            })
+                        }
+                        else if (req.body.what == 'heartrate'){
+                            entry.push({
+                                "date":req.body.date,
+                                "time":req.body.time,
+                                "bpm":req.body.bpm
+                            })
+                            Journal.findOneAndUpdate({_id: id},{heartrate:entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg: 'no scen hose'})
+                                }
+                                else{
+                                    return res.json({success: true, msg: 'updated'})
+                                }
+                                
+                            })
+                        }
                     }    
                 })    
             }
