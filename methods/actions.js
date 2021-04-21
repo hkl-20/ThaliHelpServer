@@ -185,9 +185,9 @@ var functions = {
     addarr:function(req,res){
         
         if ((req.body.what == 'bloodpressuredata' && (!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure))
-            || (res.body.what == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
-            || (res.body.what == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
-            || (res.body.what == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
+            || (req.body.what == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
+            || (req.body.what == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
+            || (req.body.what == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
         ){
             res.json({success: false, msg: 'Enter all fields'})    
         }
