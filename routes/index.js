@@ -19,6 +19,7 @@ router.get('/getjournal',actions.getjournal)
 
 // router.get('/getone',actions.getone)
 router.get('/getalltype',actions.getalltype)
+
 router.get('/getallbp',actions.getallbp)
 
 router.get('/getalliron',actions.getalliron)
@@ -34,7 +35,7 @@ router.get('/getrecentiron',actions.getrecentiron)
 router.get('/getrecentheartrate',actions.getrecentheartrate)
 
 router.get('/getrecenttransfusion',actions.getrecenttranfusion)
-
+router.get('/getrecenttype',actions.getrecenttype)
 router.post('/postajournal',actions.postajournal)
 // router.get('/getjournal',actions.getjournal)
 //@desc Authenticate a user
@@ -56,6 +57,7 @@ router.put('/appendtoheartrate',actions.addheartrate)
 router.put('/appendtobt',actions.addtranfusion)
 
 router.put('/addarr',actions.addarr)
+
 router.put('/appendtoalarm',actions.addalarm)
 
 module.exports = router
