@@ -170,11 +170,11 @@ var functions = {
     },
 
 
-    addarr:function(req,res){
-        if ((req.body.what == 'bloodpressuredata' && (!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure))
-            || (req.body.what == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
-            || (req.body.what == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
-            || (req.body.what == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
+    addtoarr:function(req,res){
+        if ((req.body.type == 'bloodpressuredata' && (!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure))
+            || (req.body.type == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
+            || (req.body.type == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
+            || (req.body.type == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
         ){
             res.json({success: false, msg: 'Enter all fields'})    
         }
@@ -196,8 +196,8 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var entry = journaldata[req.body.what]
-                        if (req.body.what == 'bloodpressuredata'){
+                        var entry = journaldata[req.body.type]
+                        if (req.body.type == 'bloodpressuredata'){
                             entry.push({
                                 "date":req.body.date,
                                 "diastolicpressure":req.body.diastolicpressure,
@@ -213,7 +213,7 @@ var functions = {
                                 }      
                             })
                         }
-                        else if (req.body.what == 'bloodtransfusion'){
+                        else if (req.body.type == 'bloodtransfusion'){
                             entry.push({
                                 "date":req.body.date,
                                 "age":req.body.age,
@@ -230,7 +230,7 @@ var functions = {
                                 }
                             })
                         }
-                        else if (req.body.what == 'ironintake'){
+                        else if (req.body.type == 'ironintake'){
                             entry.push({
                                 "date":req.body.date,
                                 "medicinename":req.body.medicinename,
@@ -246,7 +246,7 @@ var functions = {
                                 }   
                             })
                         }
-                        else if (req.body.what == 'heartrate'){
+                        else if (req.body.type == 'heartrate'){
                             entry.push({
                                 "date":req.body.date,
                                 "time":req.body.time,
@@ -466,7 +466,7 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var entries = journaldata[req.query.what]
+                        var entries = journaldata[req.query.type]
                         return res.json({success: true, msg: entries})
                     }
                 })
@@ -594,7 +594,7 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var entries = journaldata[req.query.what]
+                        var entries = journaldata[req.query.type]
                         var recent= entries[entries.length -1]
                         return res.json({success: true, msg: recent})
                     }

@@ -56,7 +56,7 @@ router.put('/appendtoheartrate',actions.addheartrate)
 
 router.put('/appendtobt',actions.addtranfusion)
 
-router.put('/addarr',actions.addarr)
+router.put('/addtosarr',actions.addarr)
 
 router.put('/appendtoalarm',actions.addalarm)
 
