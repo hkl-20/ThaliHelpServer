@@ -182,6 +182,50 @@ var functions = {
         })
     }
     },
+    addarr:function(req,res){
+        if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
+            res.json({success: false, msg: 'Enter all fields'})
+        }
+        else {
+        var id1 = new mongoose.Types.ObjectId(req.body.id)
+        User.findById({
+            _id: id1}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var bpd = journaldata[req.body.what]
+                        bpd.push({
+                            "date":req.body.date,
+                            "diastolicpressure":req.body.diastolicpressure,
+                            "systolicpressure":req.body.systolicpressure
+                        })
+                        Journal.findOneAndUpdate({_id: id},{bloodpressuredata: bpd },function(err2,jour2){
+                            if (err2) throw err2
+                            if (!jour2){
+                                res.status(403).send({success: false, msg:'Couldnt update'})
+                            }
+                            else{
+                                return res.json({success: true, msg:'updated'})
+                            }
+                            
+                        })
+                    }    
+                })    
+            }
+        })
+        }
+    },
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
             res.json({success: false, msg: 'Enter all fields'})
@@ -213,7 +257,7 @@ var functions = {
                         Journal.findOneAndUpdate({_id: id},{bloodpressuredata: bpd },function(err2,jour2){
                             if (err2) throw err2
                             if (!jour2){
-                                res.status(403).send({success: false, msg: 'no scen hose'})
+                                res.status(403).send({success: false, msg:'Couldnt update'})
                             }
                             else{
                                 return res.json({success: true, msg:'updated'})
@@ -460,6 +504,7 @@ var functions = {
             }
         })
     },
+
     getrecentbp:function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.query.id)
         User.findById({
