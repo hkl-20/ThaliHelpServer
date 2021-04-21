@@ -183,10 +183,15 @@ var functions = {
     }
     },
     addarr:function(req,res){
-        // if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
-        //     res.json({success: false, msg: 'Enter all fields'})
-        // }
-        // else {
+        
+        if ((req.body.what == 'bloodpressuredata' && (!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure))
+            || (res.body.what == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
+            || (res.body.what == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
+            || (res.body.what == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
+        ){
+            res.json({success: false, msg: 'Enter all fields'})    
+        }
+        else {
         var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
             _id: id1}, function (err, user) {
@@ -277,7 +282,7 @@ var functions = {
             }
         })
         
-    },
+    }},
     addbp:function(req,res){
         if ((!req.body.id || !req.body.date || !req.body.diastolicpressure || !req.body.systolicpressure)) {
             res.json({success: false, msg: 'Enter all fields'})
