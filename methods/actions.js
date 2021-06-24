@@ -15,7 +15,8 @@ var functions = {
                bloodtransfusion:[],
                DoctorVisits:[],
                MedicineIntake:[],
-               heartrate:[]
+               heartrate:[],
+               dailyintake:[],
             });
             newJour.save(function (err, newJour) {
                if (err) {
@@ -175,6 +176,7 @@ var functions = {
             || (req.body.type == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
             || (req.body.type == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
             || (req.body.type == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
+            || (req.body.type) == 'dailyintake' && (!req.body.id || !req.body.date || !req.body.goodfoodcount || !req.body.avgfoodcount || !req.body.badfoodcount)
         ){
             res.json({success: false, msg: 'Enter all fields'})    
         }
@@ -235,6 +237,23 @@ var functions = {
                                 "date":req.body.date,
                                 "medicinename":req.body.medicinename,
                                 "unitstaken":req.body.unitstaken
+                            })
+                            Journal.findOneAndUpdate({_id: id},{ironintake:entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg: 'no scen hose'})
+                                }
+                                else{
+                                    return res.json({success: true, msg: 'updated'})
+                                }   
+                            })
+                        }
+                        else if (req.body.type == 'dailyintake'){
+                            entry.push({
+                                "date":req.body.date,
+                                "goodfoodcount":req.body.goodfoodcount,
+                                "avgfoodcount":req.body.avgfoodcount,
+                                "badfoodcount" : req.body.badfoodcount
                             })
                             Journal.findOneAndUpdate({_id: id},{ironintake:entry },function(err2,jour2){
                                 if (err2) throw err2
@@ -674,6 +693,47 @@ var functions = {
                         var iron = journaldata.ironintake
                         var recent= iron[iron.length -1]
                         return res.json({success: true, msg: recent})
+                    }
+                })    
+            }
+        })
+    },
+    getmonthlyfoodintake:function(req,res){
+        var id1 = new mongoose.Types.ObjectId(req.query.id)
+        User.findById({
+            _id:id1}, function (err, user) {
+            if (err) throw err
+            if (!user) {
+                res.status(403).send({success: false, msg: 'User not found'})
+            }
+            else {
+                var data= JSON.parse(JSON.stringify(user))
+                var id = new mongoose.Types.ObjectId(data.journalid)
+                Journal.findById({_id: id},function(err1,jour){
+                    if (err1) throw err1
+                    if (!jour){
+                        res.status(403).send({success: false, msg: "no journal found"})
+                    }
+                    else{
+                        var journaldata= JSON.parse(JSON.stringify(jour))
+                        var food = journaldata.dailyintake
+                        var recent= JSON.parse(JSON.stringify(food[food.length -1]))
+                        var goodcount= recent.goodfoodcount
+                        var avgcount= recent.avgfoodcount
+                        var badcount= recent.badfoodcount
+                        var month = parseInt(recent.date[4,7])
+                        for (var i = food.length - 2; i >= 0; i--) {
+                            if(parseInt(food[i].date[4,7])!= month){
+                                break;
+                            }
+                            else{
+                                goodcount = goodcount + food[i].goodfoodcount
+                                avgcount = avgcount + food[i].avgfoodcount
+                                badcount = badcount+ food[i].badfoodcount
+                            }
+                        }
+                        
+                        return res.json({success: true, good: goodcount, bad: badcount, avg:avgcount})
                     }
                 })    
             }

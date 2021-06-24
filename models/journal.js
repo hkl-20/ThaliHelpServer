@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 var journalSchema = new Schema({
-    dummyvalue:String,
     bloodpressuredata: [{
         date:String,
         diastolicpressure:Number,
@@ -42,7 +41,16 @@ var journalSchema = new Schema({
             time: String,
             bpm: Number
         }
-    ],
+    ]
+    ,
+    dailyintake:[
+        {
+            date: String,
+            goodfoodcount: Number,
+            avgfoodcount: Number,
+            badfoodcount: Number
+        }
+    ]
 
 
 })

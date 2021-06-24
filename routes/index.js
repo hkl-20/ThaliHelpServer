@@ -60,4 +60,5 @@ router.put('/addtoarr',actions.addtoarr)
 
 router.put('/appendtoalarm',actions.addalarm)
 
+router.get('/getmonthlyintake',actions.getmonthlyfoodintake)
 module.exports = router
