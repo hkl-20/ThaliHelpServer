@@ -255,7 +255,7 @@ var functions = {
                                 "avgfoodcount":req.body.avgfoodcount,
                                 "badfoodcount" : req.body.badfoodcount
                             })
-                            Journal.findOneAndUpdate({_id: id},{ironintake:entry },function(err2,jour2){
+                            Journal.findOneAndUpdate({_id: id},{dailyintake:entry },function(err2,jour2){
                                 if (err2) throw err2
                                 if (!jour2){
                                     res.status(403).send({success: false, msg: 'no scen hose'})
@@ -721,9 +721,9 @@ var functions = {
                         var goodcount= recent.goodfoodcount
                         var avgcount= recent.avgfoodcount
                         var badcount= recent.badfoodcount
-                        var month = parseInt(recent.date[4,7])
+                        var month = parseInt(recent.date[4,6])
                         for (var i = food.length - 2; i >= 0; i--) {
-                            if(parseInt(food[i].date[4,7])!= month){
+                            if(parseInt(food[i].date[4,6])!= month){
                                 break;
                             }
                             else{
