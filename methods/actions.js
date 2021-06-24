@@ -728,12 +728,9 @@ var functions = {
                                 goodcount = goodcount + food[i].goodfoodcount
                                 avgcount = avgcount + food[i].avgfoodcount
                                 badcount = badcount+ food[i].badfoodcount
-                            }
-                            // month = parseInt(food[i].date[4,6])
-                            
+                            }                            
                         }
-                        
-                        return res.json({success: true, good: goodcount, bad: badcount, avg:avgcount, mon:month})
+                        return res.json({success: true, good: goodcount, bad: badcount, avg:avgcount})
                     }
                 })    
             }
