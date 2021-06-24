@@ -723,13 +723,13 @@ var functions = {
                         var badcount= 0
                         var month = parseInt(recent.date[4,6])
                         for (var i = food.length - 1 ; i >= 0 ; i--) {
-                            // if(parseInt(food[i].date[4,6]) == month){
+                            if(parseInt(food[i].date[4,6]) === month){
 
-                            //     goodcount = goodcount + food[i].goodfoodcount
-                            //     avgcount = avgcount + food[i].avgfoodcount
-                            //     badcount = badcount+ food[i].badfoodcount
-                            month = parseInt(food[i].date[4,6])
-                            break
+                                goodcount = goodcount + food[i].goodfoodcount
+                                avgcount = avgcount + food[i].avgfoodcount
+                                badcount = badcount+ food[i].badfoodcount
+                            }
+                            // month = parseInt(food[i].date[4,6])
                             
                         }
                         
