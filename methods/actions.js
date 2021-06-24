@@ -722,16 +722,16 @@ var functions = {
                         var avgcount= 0
                         var badcount= 0
                         var month = parseInt(recent.date[5,7])
-                        for (var i = 0 ; i < food.length ; i++) {
-                            if(parseInt(food[i].date[5,7]) == month){
+                        // for (var i = 0 ; i < food.length ; i++) {
+                        //     if(parseInt(food[i].date[5,7]) == month){
 
-                                goodcount = goodcount + food[i].goodfoodcount
-                                avgcount = avgcount + food[i].avgfoodcount
-                                badcount = badcount+ food[i].badfoodcount
-                            }
-                        }
+                        //         goodcount = goodcount + food[i].goodfoodcount
+                        //         avgcount = avgcount + food[i].avgfoodcount
+                        //         badcount = badcount+ food[i].badfoodcount
+                        //     }
+                        // }
                         
-                        return res.json({success: true, good: goodcount, bad: badcount, avg:avgcount})
+                        return res.json({success: true, good: goodcount, bad: badcount, avg:avgcount, mon:month})
                     }
                 })    
             }
