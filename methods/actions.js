@@ -16,7 +16,9 @@ var functions = {
                DoctorVisits:[],
                MedicineIntake:[],
                heartrate:[],
-               dailyintake:[],
+               dailyintakegood:[],
+               dailyintakebad:[],
+               dailyintakeavg:[],
             });
             newJour.save(function (err, newJour) {
                if (err) {
