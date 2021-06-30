@@ -756,7 +756,7 @@ var functions = {
                         for (var i = food.length - 1 ; i >= 0 ; i--) {
                             if(parseInt(food[i].date[4,6]) === month){
 
-                                count = count + food[i].goodfoodcount
+                                count = count + food[i].foodcount
                             }                            
                         }
                         return res.json({success: true, value : count})
