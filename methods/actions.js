@@ -82,6 +82,7 @@ var functions = {
     //         return res.json({success: false, msg: 'No Headers'})
     //     }
     // },
+
     getuser: function(req,res){
         var id1 = new mongoose.Types.ObjectId(req.body.id)
         User.findById({
@@ -176,7 +177,9 @@ var functions = {
             || (req.body.type == 'ironintake' && (!req.body.id || !req.body.date || !req.body.medicinename || !req.body.unitstaken)) 
             || (req.body.type == 'heartrate' && (!req.body.id || !req.body.date || !req.body.time || !req.body.bpm))
             || (req.body.type == 'bloodtransfusion' && (!req.body.id || !req.body.date || !req.body.age  ||!req.body.whitebloodcells || !req.body.amounttransfused))
-            || (req.body.type) == 'dailyintake' && (!req.body.id || !req.body.date || !req.body.goodfoodcount || !req.body.avgfoodcount || !req.body.badfoodcount)
+            || (req.body.type) == 'dailyintakegood' && (!req.body.id || !req.body.date || !req.body.goodfoodcount )
+            || (req.body.type) == 'dailyintakebad' && (!req.body.id || !req.body.date || !req.body.badfoodcount )
+            || (req.body.type) == 'dailyintakeavg' && (!req.body.id || !req.body.date || !req.body.avgfoodcount )
         ){
             res.json({success: false, msg: 'Enter all fields'})    
         }
@@ -248,14 +251,42 @@ var functions = {
                                 }   
                             })
                         }
-                        else if (req.body.type == 'dailyintake'){
+                        else if (req.body.type == 'dailyintakegood'){
                             entry.push({
                                 "date":req.body.date,
                                 "goodfoodcount":req.body.goodfoodcount,
-                                "avgfoodcount":req.body.avgfoodcount,
-                                "badfoodcount" : req.body.badfoodcount
                             })
-                            Journal.findOneAndUpdate({_id: id},{dailyintake:entry },function(err2,jour2){
+                            Journal.findOneAndUpdate({_id: id},{dailyintakegood:entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg: 'no scen hose'})
+                                }
+                                else{
+                                    return res.json({success: true, msg: 'updated'})
+                                }   
+                            })
+                        }
+                        else if (req.body.type == 'dailyintakebad'){
+                            entry.push({
+                                "date":req.body.date,
+                                "badfoodcount":req.body.badfoodcount,
+                            })
+                            Journal.findOneAndUpdate({_id: id},{dailyintakebad:entry },function(err2,jour2){
+                                if (err2) throw err2
+                                if (!jour2){
+                                    res.status(403).send({success: false, msg: 'no scen hose'})
+                                }
+                                else{
+                                    return res.json({success: true, msg: 'updated'})
+                                }   
+                            })
+                        }
+                        else if (req.body.type == 'dailyintakeavg'){
+                            entry.push({
+                                "date":req.body.date,
+                                "avgfoodcount":req.body.avgfoodcount,
+                            })
+                            Journal.findOneAndUpdate({_id: id},{dailyintakeavg:entry },function(err2,jour2){
                                 if (err2) throw err2
                                 if (!jour2){
                                     res.status(403).send({success: false, msg: 'no scen hose'})
@@ -716,21 +747,17 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var food = journaldata.dailyintake
+                        var food = journaldata[req.query.type]
                         var recent= JSON.parse(JSON.stringify(food[food.length -1]))
-                        var goodcount= 0
-                        var avgcount= 0
-                        var badcount= 0
+                        var count= 0
                         var month = parseInt(recent.date[4,6])
                         for (var i = food.length - 1 ; i >= 0 ; i--) {
                             if(parseInt(food[i].date[4,6]) === month){
 
-                                goodcount = goodcount + food[i].goodfoodcount
-                                avgcount = avgcount + food[i].avgfoodcount
-                                badcount = badcount+ food[i].badfoodcount
+                                count = count + food[i].goodfoodcount
                             }                            
                         }
-                        return res.json({success: true, good: goodcount, bad: badcount, avg:avgcount})
+                        return res.json({success: true, value : count})
                     }
                 })    
             }
