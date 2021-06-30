@@ -256,7 +256,7 @@ var functions = {
                         else if (req.body.type == 'dailyintakegood'){
                             entry.push({
                                 "date":req.body.date,
-                                "goodfoodcount":req.body.goodfoodcount,
+                                "foodcount":req.body.goodfoodcount,
                             })
                             Journal.findOneAndUpdate({_id: id},{dailyintakegood:entry },function(err2,jour2){
                                 if (err2) throw err2
@@ -271,7 +271,7 @@ var functions = {
                         else if (req.body.type == 'dailyintakebad'){
                             entry.push({
                                 "date":req.body.date,
-                                "badfoodcount":req.body.badfoodcount,
+                                "foodcount":req.body.badfoodcount,
                             })
                             Journal.findOneAndUpdate({_id: id},{dailyintakebad:entry },function(err2,jour2){
                                 if (err2) throw err2
@@ -286,7 +286,7 @@ var functions = {
                         else if (req.body.type == 'dailyintakeavg'){
                             entry.push({
                                 "date":req.body.date,
-                                "avgfoodcount":req.body.avgfoodcount,
+                                "foodcount":req.body.avgfoodcount,
                             })
                             Journal.findOneAndUpdate({_id: id},{dailyintakeavg:entry },function(err2,jour2){
                                 if (err2) throw err2
