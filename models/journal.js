@@ -43,12 +43,24 @@ var journalSchema = new Schema({
         }
     ]
     ,
-    dailyintake:[
+    dailyintakegood:[
         {
             date: String,
             goodfoodcount: Number,
+        }
+    ]
+    ,
+    dailyintakebad:[
+        {
+            date: String,
+            badfoodcount: Number,
+        }
+    ]
+    ,
+    dailyintakeavg:[
+        {
+            date: String,
             avgfoodcount: Number,
-            badfoodcount: Number
         }
     ]
 
