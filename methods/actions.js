@@ -758,7 +758,7 @@ var functions = {
                         var goodcount= 0
                         var avgcount= 0
                         var badcount = 0
-                        var month = max([parseInt(recentgood.date[4,6]),parseInt(recentavg.date[4,6]),parseInt(recentbad.date[4,6])])
+                        var month = Math.max(parseInt(recentgood.date[4,6]),parseInt(recentavg.date[4,6]),parseInt(recentbad.date[4,6]))
                         for (var i = foodgood.length - 1 ; i >= 0 ; i--) {
                             if(parseInt(foodgood[i].date[4,6]) === month){
 
