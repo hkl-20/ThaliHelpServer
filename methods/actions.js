@@ -749,17 +749,37 @@ var functions = {
                     }
                     else{
                         var journaldata= JSON.parse(JSON.stringify(jour))
-                        var food = journaldata[req.query.type]
-                        var recent= JSON.parse(JSON.stringify(food[food.length -1]))
-                        var count= 0
-                        var month = parseInt(recent.date[4,6])
-                        for (var i = food.length - 1 ; i >= 0 ; i--) {
-                            if(parseInt(food[i].date[4,6]) === month){
+                        var foodgood = journaldata.dailyintakegood
+                        var foodavg =  journaldata.dailyintakeavg
+                        var foodbad = journaldata.dailyintakebad
+                        var recentgood= JSON.parse(JSON.stringify(foodgood[foodgood.length -1]))
+                        var recentavg= JSON.parse(JSON.stringify(foodavg[foodavg.length -1]))
+                        var recentbad= JSON.parse(JSON.stringify(foodbad[foodbad.length -1]))
+                        var goodcount= 0
+                        var avgcount= 0
+                        var badcount = 0
+                        var month = max([parseInt(recentgood.date[4,6]),parseInt(recentavg.date[4,6]),parseInt(recentbad.date[4,6])])
+                        for (var i = foodgood.length - 1 ; i >= 0 ; i--) {
+                            if(parseInt(foodgood[i].date[4,6]) === month){
 
-                                count = count + food[i].foodcount
+                                goodcount = goodcount + foodgood[i].foodcount
                             }                            
                         }
-                        return res.json({success: true, value : count})
+                        for (var i = foodavg.length - 1 ; i >= 0 ; i--) {
+                            if(parseInt(foodavg[i].date[4,6]) === month){
+
+                                avgcount = avgcount + foodavg[i].foodcount
+                            }                            
+                        }
+                        for (var i = foodbad.length - 1 ; i >= 0 ; i--) {
+                            if(parseInt(foodbad[i].date[4,6]) === month){
+
+                                badcount = badcount + foodbad[i].foodcount
+                            }                            
+                        }
+                        
+
+                        return res.json({success: true, healthy : goodcount, unhealthy:badcount , avoid:avgcount})
                     }
                 })    
             }
