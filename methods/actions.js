@@ -779,7 +779,7 @@ var functions = {
                         }
                         
 
-                        return res.json({success: true, healthy : goodcount, unhealthy:badcount , avoid:avgcount})
+                        return res.json({success: true, healthy : goodcount, unhealthy:badcount , avoid:avgcount, monthh:month })
                     }
                 })    
             }
